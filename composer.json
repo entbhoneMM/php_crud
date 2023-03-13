@@ -1,0 +1,22 @@
+{
+    "name": "nash/loginpj",
+    "authors": [
+        {
+            "name": "entbhone",
+            "email": "entbhonemyintmo@gmail.com"
+        }
+    ],
+    "require": 
+    {
+        "fakerphp/faker": "^1.21"
+    },
+    "autoload": 
+    {
+        "psr-4": 
+        {
+            "Helpers\\": "_classes/Helpers",
+            "Libs\\": "_classes/Libs"
+            
+        }
+    }
+}
