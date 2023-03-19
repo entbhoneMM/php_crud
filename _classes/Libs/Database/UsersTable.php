@@ -65,4 +65,58 @@ class UsersTable
             exit();
         }
     }
+
+    public function delete($id)
+    {
+        try {
+            $statement = $this->db->prepare("DELETE FROM users WHERE id = :id");
+            $statement->execute([":id" => $id]);
+
+            return $statement->rowCount();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
+
+
+    public function suspend($id)
+    {
+        try {
+            $statement = $this->db->prepare("UPDATE users SET suspended=1 WHERE id = :id");
+            $statement->execute([":id" => $id]);
+
+            return $statement->rowCount();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
+
+    public function unsuspend($id)
+    {
+        try {
+            $statement = $this->db->prepare("UPDATE users SET suspended=0 WHERE id = :id");
+            $statement->execute([":id" => $id]);
+
+            return $statement->rowCount();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
+
+    public function changeRole($id, $role)
+    {
+        try {
+            $statement = $this->db->prepare("UPDATE users SET role_id=:role WHERE id = :id");
+            $statement->execute([":role" => $role, ":id" => $id]);
+
+            return $statement->rowCount();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
+
 }

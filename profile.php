@@ -46,7 +46,8 @@ $user = Auth::check();
             </li>
         </ul>
         <br>
-        <a href="_actions/logout.php">Logout</a>
+        <a href="admin.php" class="btn btn-primary">Admin</a>
+        <a href="_actions/logout.php" class="btn btn-danger mx-3">Logout</a>
     </div>
 </body>
 

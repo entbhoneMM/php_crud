@@ -10,5 +10,6 @@ class HTTP
         $url = static::$base . $path;
         if ($q) $url .= "?$q";
         header("location: $url");
+        exit();
     }
 }

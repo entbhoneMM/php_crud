@@ -12,6 +12,11 @@ $password = $_POST['password'];
 $user = $table->findByEmailAndPassword($email, $password);
 
 if ($user) {
+
+    if ($user->suspended) {
+        HTTP::redirect('/index.php', 'suspended=1');
+    }
+
     session_start();
     $_SESSION['user'] = $user;
     HTTP::redirect("/profile.php");
