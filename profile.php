@@ -1,9 +1,11 @@
 <?php
-session_start();
-if (!isset($_SESSION['user'])) {
-    header('location: index.php');
-    exit();
-}
+
+include("vendor/autoload.php");
+
+use Helpers\Auth;
+
+$user = Auth::check();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,14 +19,14 @@ if (!isset($_SESSION['user'])) {
 
 <body>
     <div class="container mt-5">
-        <h1 class="mb-3">Ent Bhone Myint Mo</h1>
+        <h1 class="mb-3"><?= $user->name ?></h1>
         <?php if (isset($_GET['error'])) : ?>
             <div class="alert alert-warning">
                 Cannot upload file
             </div>
         <?php endif ?>
-        <?php if (file_exists('_actions/photos/profile.jpg')) : ?>
-            <img class="img-thumbnail mb-3" src="_actions/photos/profile.jpg" alt="Profile Photo" width="200">
+        <?php if ($user->photo) : ?>
+            <img class="img-thumbnail mb-3" src="_actions/photos/<?= $user->photo ?>" alt="Profile Photo" width="200">
         <?php endif ?>
         <form action="_actions/upload.php" method="post" enctype="multipart/form-data">
             <div class="input-group mb-3">
@@ -34,13 +36,13 @@ if (!isset($_SESSION['user'])) {
         </form>
         <ul class="list-group">
             <li class="list-group-item">
-                <b>Email:</b> entbhonemyintmo@gmail.com
+                <b>Email:</b> <?= $user->email ?>
             </li>
             <li class="list-group-item">
-                <b>Phone:</b> (09) 266550050
+                <b>Phone:</b> <?= $user->phone ?>
             </li>
             <li class="list-group-item">
-                <b>Address:</b> No. 321, Main Street, West City
+                <b>Address:</b> <?= $user->address ?>
             </li>
         </ul>
         <br>

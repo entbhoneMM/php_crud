@@ -27,6 +27,34 @@ class UsersTable
         }
     }
 
+    public function findByEmailAndPassword($email, $password)
+    {
+        try {
+            $statement = $this->db->prepare("SELECT * FROM users WHERE email=:email AND password=:password");
+            $statement->execute(["email" => $email, "password" => $password]);
+            $user = $statement->fetch();
+
+            return $user ?? false;
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
+
+    public function updatePhoto($photo, $id)
+    {
+        try {
+            $statement = $this->db->prepare("UPDATE users SET photo=:photo WHERE id = :id");
+            $statement->execute([":photo" => $photo, ":id" => $id]);
+
+            return $statement->rowCount();
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            exit();
+        }
+    }
+
+
     public function getAll()
     {
         try {
