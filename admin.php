@@ -26,6 +26,11 @@ $users = $table->getAll();
 <body class="bg-secondary">
     <div class="container">
 
+        <div style="float: right">
+            <a href="profile.php" class="btn btn-primary">Profile</a> |
+            <a href="_actions/logout.php" class="btn btn-outline-danger">Logout</a>
+        </div>
+
         <h1 class="h3 mt-4 mb-3">User Admin
             <span class="badge bg-danger text-white">
                 <?= count($users) ?>
